@@ -22,7 +22,7 @@ function App() {
       renderPage={<><Navbar currentPath="/"/><LoginPage/></>}
       errorMessage="You are already loggedIn"
         devMode={import.meta.env.VITE_DEV_MODE}
-        fallback={<><Navbar/><Home/></>}
+        fallback="/home"
         isLoading={isLoading}
       />}/>
 
@@ -32,7 +32,7 @@ function App() {
       renderPage={<><Navbar currentPath="/home" /><Home/></>}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE}
-        fallback={<LoginPage/>}
+        fallback="/"
         isLoading={isLoading}
       />
       }/>
@@ -44,7 +44,7 @@ function App() {
       isLoading={isLoading}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE}
-        fallback={<LoginPage/>}
+        fallback="/"
       />
      }/>
      </Routes>
