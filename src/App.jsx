@@ -3,7 +3,7 @@ import DailyEntryForm from "./pages/Form.jsx"
 import LoginPage from "./pages/Login.jsx"
 import Navbar from "./components/Navbar.jsx"
 
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import {  Routes, Route } from "react-router-dom"
 import RenderProtectedRoutes from "./utilis/renderProtectedRoute.jsx"
 import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext.jsx"
@@ -12,26 +12,26 @@ function App() {
   const {isAuthenticated, isLoading} = useContext(AuthContext);
   return (
     <>
-    <BrowserRouter>
+    <Navbar/>
      <Routes>
       <Route path="/" element={
         <RenderProtectedRoutes
       condition={
         isAuthenticated === false
       }
-      renderPage={<><Navbar currentPath="/"/><LoginPage/></>}
+      renderPage={<LoginPage/>}
       errorMessage="You are already loggedIn"
-        devMode={import.meta.env.VITE_DEV_MODE}
+        devMode={import.meta.env.VITE_DEV_MODE == "true"}
         fallback="/home"
         isLoading={isLoading}
       />}/>
 
      <Route path="/home" element={
        <RenderProtectedRoutes
-      condition={isAuthenticated}
-      renderPage={<><Navbar currentPath="/home" /><Home/></>}
+      condition={isAuthenticated === true}
+      renderPage={<Home/>}
       errorMessage="You cannot access it Login first."
-        devMode={import.meta.env.VITE_DEV_MODE}
+        devMode={import.meta.env.VITE_DEV_MODE == "true"}
         fallback="/"
         isLoading={isLoading}
       />
@@ -39,16 +39,15 @@ function App() {
 
      <Route path="/form" element={
       <RenderProtectedRoutes
-      condition={isAuthenticated}
-      renderPage={<><Navbar currentPath="/form"/><DailyEntryForm/></>}
+      condition={isAuthenticated === true}
+      renderPage={<DailyEntryForm/>}
       isLoading={isLoading}
-      errorMessage="You cannot access it Login first."
-        devMode={import.meta.env.VITE_DEV_MODE}
+      errorMessage="You cannot access it.Login first."
+        devMode={import.meta.env.VITE_DEV_MODE == "true"}
         fallback="/"
       />
      }/>
      </Routes>
-    </BrowserRouter>
     </>
   )
 }
