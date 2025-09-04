@@ -8,7 +8,7 @@ const RenderProtectedRoute = ({
   errorMessage,
   devMode = false,
 }) => {
-    console.log("Protected Route Condition:", condition);
+    // console.log("Protected Route Condition:", condition);
 
   const checkFailed = () => {
     if (!condition) {

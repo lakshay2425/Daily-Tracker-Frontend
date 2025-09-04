@@ -14,11 +14,11 @@ try {
       withCredentials: true
     }
     )
-    console.log("Auth Status Check:", {
-    isAuthenticated,
-    gmail,
-    apiResponse: apiResponse?.status
-});
+//     console.log("Auth Status Check:", {
+//     isAuthenticated,
+//     gmail,
+//     apiResponse: apiResponse?.status
+// });
     // console.log(apiResponse, "API response of verify token")
     if(apiResponse.status === 200){
       setIsAuthenticated(true);
