@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useContext, useState } from 'react';
 import { Activity, Home, LogIn, FileText, Menu, X } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 
 // Navigation Item Component
@@ -104,8 +104,13 @@ const MobileMenu = ({ isOpen, currentPath, onNavigate, onClose, isAuthenticated 
 };
 
 // Main Navbar Component
-const Navbar = ({ currentPath }) => {
+const Navbar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  // console.log(currentPath, "Current Path Name");
+
   const {isAuthenticated} = useContext(AuthContext);
     // console.log("Navbar Auth State:", isAuthenticated);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -141,10 +146,10 @@ const Navbar = ({ currentPath }) => {
             <div className="hidden lg:flex items-center gap-2">
               {navItems.map((item) => (
                 <NavItem
-                  key={item.path}
-                  {...item}
                   isActive={currentPath === item.path}
                   onClick={handleNavigate}
+                  key={item.path}
+                  {...item}
                 />
               ))}
             </div>
@@ -163,9 +168,9 @@ const Navbar = ({ currentPath }) => {
       {/* Mobile Menu */}
       <MobileMenu
         isOpen={isMobileMenuOpen}
+        isAuthenticated={isAuthenticated}
         currentPath={currentPath}
         onNavigate={handleNavigate}
-        isAuthenticated={isAuthenticated}
         onClose={() => setIsMobileMenuOpen(false)}
       />
 
