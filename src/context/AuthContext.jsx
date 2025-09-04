@@ -17,7 +17,7 @@ try {
     // console.log(apiResponse, "API response of verify token")
     if(apiResponse.status === 200){
       setIsAuthenticated(true);
-      setGmail(apiResponse.data.gmail);
+      setGmail(apiResponse.data.userInfo.userInfo.userEmail);
     }else{
       setIsAuthenticated(false);
       setGmail("");
@@ -29,10 +29,10 @@ try {
 }
 }
   useEffect( ()=>{
-    if(gmail == ""){
+    if(gmail == "" && isAuthenticated === false){
       checkAuthStatus();
     }
-  }, [gmail])
+  }, [gmail, isAuthenticated])
 
   const authContextValue = {
     isAuthenticated,
