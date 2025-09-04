@@ -9,7 +9,7 @@ import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext.jsx"
 
 function App() {
-  const {isAuthenticated, isLoading, gmail} = useContext(AuthContext);
+  const {isAuthenticated, isLoading} = useContext(AuthContext);
   return (
     <>
     <BrowserRouter>
@@ -17,7 +17,7 @@ function App() {
       <Route path="/" element={
         <RenderProtectedRoutes
       condition={
-        isAuthenticated === false && gmail === ""
+        isAuthenticated === false
       }
       renderPage={<><Navbar/><LoginPage/></>}
       errorMessage="You are already loggedIn"
@@ -28,9 +28,7 @@ function App() {
 
      <Route path="/home" element={
        <RenderProtectedRoutes
-      condition={
-        isAuthenticated === true && gmail != null
-      }
+      condition={isAuthenticated}
       renderPage={<><Navbar/><Home/></>}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE}
@@ -41,9 +39,7 @@ function App() {
 
      <Route path="/form" element={
       <RenderProtectedRoutes
-      condition={
-          isAuthenticated === true && gmail != null
-      }
+      condition={isAuthenticated}
       renderPage={<><Navbar/><DailyEntryForm/></>}
       isLoading={isLoading}
       errorMessage="You cannot access it Login first."
