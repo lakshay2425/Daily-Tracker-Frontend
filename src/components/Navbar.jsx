@@ -104,7 +104,7 @@ const MobileMenu = ({ isOpen, currentPath, onNavigate, onClose, isAuthenticated 
 };
 
 // Main Navbar Component
-const Navbar = ({ currentPath = '/' }) => {
+const Navbar = ({ currentPath }) => {
   const navigate = useNavigate();
   const {isAuthenticated} = useContext(AuthContext);
     console.log("Navbar Auth State:", isAuthenticated);
@@ -124,6 +124,10 @@ const Navbar = ({ currentPath = '/' }) => {
     navigate(path);
   };
 
+    const handleLogoClick = () => {
+    navigate(isAuthenticated ? '/home' : '/');
+  };
+
   return (
     <>
       {/* Main Navbar */}
@@ -131,7 +135,7 @@ const Navbar = ({ currentPath = '/' }) => {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Logo onClick={()=> navigate("/home")} />
+            <Logo onClick={handleLogoClick} />
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-2">

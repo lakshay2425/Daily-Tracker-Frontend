@@ -19,17 +19,17 @@ function App() {
       condition={
         isAuthenticated === false
       }
-      renderPage={<><Navbar/><LoginPage/></>}
+      renderPage={<><Navbar currentPath="/"/><LoginPage/></>}
       errorMessage="You are already loggedIn"
         devMode={import.meta.env.VITE_DEV_MODE}
-        fallback={<><Navbar currentPath="/"/><Home/></>}
+        fallback={<><Navbar/><Home/></>}
         isLoading={isLoading}
       />}/>
 
      <Route path="/home" element={
        <RenderProtectedRoutes
       condition={isAuthenticated}
-      renderPage={<><Navbar/><Home/></>}
+      renderPage={<><Navbar currentPath="/home" /><Home/></>}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE}
         fallback={<LoginPage/>}
@@ -40,7 +40,7 @@ function App() {
      <Route path="/form" element={
       <RenderProtectedRoutes
       condition={isAuthenticated}
-      renderPage={<><Navbar/><DailyEntryForm/></>}
+      renderPage={<><Navbar currentPath="/form"/><DailyEntryForm/></>}
       isLoading={isLoading}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE}
