@@ -22,7 +22,7 @@ function App() {
       renderPage={<><Navbar/><LoginPage/></>}
       errorMessage="You are already loggedIn"
         devMode={import.meta.env.VITE_DEV_MODE}
-        fallback={<><Navbar/><Home/></>}
+        fallback={<><Navbar currentPath="/"/><Home/></>}
         isLoading={isLoading}
       />}/>
 

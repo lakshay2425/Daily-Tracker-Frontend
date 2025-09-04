@@ -38,7 +38,8 @@ const Logo = ({ onClick }) => (
 
 // Mobile Menu Component
 const MobileMenu = ({ isOpen, currentPath, onNavigate, onClose, isAuthenticated }) => {
-  const navItems = isAuthenticated 
+  console.log(typeof isAuthenticated, isAuthenticated, "Type of isAuthenticated in Mobile Navbar")
+  const navItems = isAuthenticated === true 
     ? [
         { icon: Home, label: 'Home', path: '/home' },
         { icon: FileText, label: 'Add Entry', path: '/form' }
@@ -103,12 +104,14 @@ const MobileMenu = ({ isOpen, currentPath, onNavigate, onClose, isAuthenticated 
 };
 
 // Main Navbar Component
-const Navbar = ({ currentPath = '/home' }) => {
+const Navbar = ({ currentPath = '/' }) => {
   const navigate = useNavigate();
   const {isAuthenticated} = useContext(AuthContext);
+    console.log("Navbar Auth State:", isAuthenticated);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = isAuthenticated 
+    console.log(typeof isAuthenticated, "Type of isAuthenticated in Navbar")
+  const navItems = isAuthenticated === true
     ? [
         { icon: Home, label: 'Home', path: '/home' },
         { icon: FileText, label: 'Add Entry', path: '/form' }
