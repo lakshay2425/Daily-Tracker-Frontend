@@ -57,26 +57,26 @@ const App = () => {
   );
 };
 
-// HomePage Component
+// HomePage Component - Improve text sizing and grid layout
 const HomePage = ({ data, navigateToDay }) => {
   return (
-    <div className="container mx-auto px-6 py-8">
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold  mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="text-center mb-8 sm:mb-12">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Daily Tracker
         </h1>
-        <p className="text-gray-300 text-lg">Track your progress, build better habits</p>
+        <p className="text-gray-300 text-base sm:text-lg">Track your progress, build better habits</p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="lg:col-span-2 space-y-6 sm:space-y-8">
           <CalendarView data={data} navigateToDay={navigateToDay} />
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <ActivityGraph data={data} />
           </div>
         </div>
         
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           <StreakTracker data={data} />
         </div>
       </div>
@@ -176,7 +176,7 @@ const CalendarView = ({ data, navigateToDay }) => {
         </div>
         
         {/* Calendar grid */}
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
           {days.map((dayObj, index) => {
             const { date, isCurrentMonth } = dayObj;
             const isToday = date.toDateString() === new Date().toDateString();
@@ -188,22 +188,22 @@ const CalendarView = ({ data, navigateToDay }) => {
                 key={index}
                 onClick={() => navigateToDay(date)}
                 className={`
-                  relative h-12 p-1 text-sm font-medium transition-all duration-300 rounded-lg
-                  ${isCurrentMonth ? 'text-white hover:bg-purple-500/20' : 'text-gray-600'}
-                  ${isToday ? 'bg-blue-500/20 border border-blue-400 text-blue-300' : ''}
-                  ${hasData ? 'bg-purple-500/10 border border-purple-400/30' : ''}
-                  hover:scale-105 hover:shadow-lg
-                `}
+          relative h-8 sm:h-10 md:h-12 p-0.5 sm:p-1 text-xs sm:text-sm font-medium transition-all duration-300 rounded-lg
+          ${isCurrentMonth ? 'text-white hover:bg-purple-500/20' : 'text-gray-600'}
+          ${isToday ? 'bg-blue-500/20 border border-blue-400 text-blue-300' : ''}
+          ${hasData ? 'bg-purple-500/10 border border-purple-400/30' : ''}
+          hover:scale-105 hover:shadow-lg
+        `}
               >
                 <div className="flex flex-col items-center justify-center h-full">
-                  <span>{date.getDate()}</span>
+                  <span className="text-xs sm:text-sm">{date.getDate()}</span>
                   {hasData && (
-                    <div 
-                      className="w-1.5 h-1.5 rounded-full mt-0.5"
-                      style={{
-                        backgroundColor: completionRate > 0.8 ? '#10b981' : completionRate > 0.5 ? '#f59e0b' : '#ef4444'
-                      }}
-                    />
+                     <div className="hidden sm:block mt-0.5 w-full max-w-[24px] bg-gray-700 rounded-full h-1">
+              <div
+                className="h-1 rounded-full bg-green-400"
+                style={{ width: `${completionRate * 100}%` }}
+              />
+            </div>
                   )}
                 </div>
               </button>
@@ -286,16 +286,16 @@ const ActivityGraph = ({ data }) => {
           <h2 className="text-2xl font-bold text-white">Progress Overview</h2>
         </div>
         
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {['This Week', 'This Month', 'Last 30 Days'].map(range => (
             <button
               key={range}
               onClick={() => setDateRange(range)}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                dateRange === range
-                  ? 'bg-purple-500 text-white shadow-lg'
-                  : 'bg-white/10 text-gray-300 hover:bg-white/20'
-              }`}
+                      className={`px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 ${
+          dateRange === range
+            ? 'bg-purple-500 text-white shadow-lg'
+            : 'bg-white/10 text-gray-300 hover:bg-white/20'
+        }`}
             >
               {range}
             </button>

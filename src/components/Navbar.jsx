@@ -20,17 +20,17 @@ const NavItem = ({ icon: Icon, label, path, isActive, onClick, isMobile = false 
   </button>
 );
 
-// Logo Component
+// Logo Component - Improve spacing on smaller screens
 const Logo = ({ onClick }) => (
   <button
     onClick={onClick}
-    className="flex items-center gap-3 text-white hover:text-white/90 transition-colors duration-200"
+    className="flex items-center gap-2 sm:gap-3 text-white hover:text-white/90 transition-colors duration-200"
   >
-    <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
-      <Activity className="w-6 h-6 text-white" />
+    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl flex items-center justify-center">
+      <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
     </div>
     <div className="hidden md:block">
-      <h1 className="text-xl font-bold">Daily Tracker</h1>
+      <h1 className="text-lg sm:text-xl font-bold">Daily Tracker</h1>
       <p className="text-xs text-white/70 -mt-1">Build better habits</p>
     </div>
   </button>
@@ -109,13 +109,11 @@ const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  // console.log(currentPath, "Current Path Name");
 
   const {isAuthenticated} = useContext(AuthContext);
     // console.log("Navbar Auth State:", isAuthenticated);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-    // console.log(typeof isAuthenticated, "Type of isAuthenticated in Navbar")
   const navItems = isAuthenticated === true
     ? [
         { icon: Home, label: 'Home', path: '/home' },
@@ -136,7 +134,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-purple-900 to-indigo-900 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+      <nav className="sticky top-0 z-40 bg-gradient-to-r from-slate-900 via-purple-900 to-indigo-900 backdrop-blur-xl border-b border-white/10 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}

@@ -34,17 +34,17 @@ const DayDetailPage = ({ date, data, navigateHome }) => {
   }, []) || [];
 
   return (
-    <div className="container mx-auto px-6 py-8">
-      <div className="mb-8">
+    <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+      <div className="mb-6 sm:mb-8">
         <button
           onClick={navigateHome}
-          className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300 mb-4"
+          className="flex items-center gap-2 text-gray-300 hover:text-white transition-colors duration-300 mb-3 sm:mb-4"
         >
-          <ArrowLeft size={20} />
+          <ArrowLeft size={18} sm:size={20} />
           Back to Calendar
         </button>
         
-        <h1 className="text-4xl font-bold text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2">
           {date[0]?.toLocaleDateString('en-US', { 
             weekday: 'long', 
             year: 'numeric', 
@@ -56,22 +56,22 @@ const DayDetailPage = ({ date, data, navigateHome }) => {
       </div>
 
       {!data ? (
-        <div className="text-center py-16">
-          <div className="text-6xl mb-4">📅</div>
-          <h2 className="text-2xl text-white mb-2">No data for this day</h2>
+        <div className="text-center py-12 sm:py-16">
+          <div className="text-5xl sm:text-6xl mb-4">📅</div>
+          <h2 className="text-xl sm:text-2xl text-white mb-2">No data for this day</h2>
           <p className="text-gray-400">Start tracking your daily activities!</p>
         </div>
       ) : (
-        <div className="grid lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+          <div className="lg:col-span-2 space-y-6 sm:space-y-8">
             {/* Checklist */}
-            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl">
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <CheckCircle className="text-green-400" size={24} />
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 border border-white/10 shadow-2xl">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
+                <CheckCircle className="text-green-400" size={20} sm:size={24} />
                 Daily Checklist
               </h2>
               
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {checklistItems.map(item => (
                   <div
                     key={item.key}
