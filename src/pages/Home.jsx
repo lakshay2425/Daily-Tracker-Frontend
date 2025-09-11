@@ -176,7 +176,6 @@ const CalendarView = ({ data, navigateToDay }) => {
         </div>
         
         {/* Calendar grid */}
-        // Calendar grid - make it more compact on small screens
         <div className="grid grid-cols-7 gap-0 xs:gap-0.5 sm:gap-1">
           {days.map((dayObj, index) => {
             const { date, isCurrentMonth } = dayObj;
