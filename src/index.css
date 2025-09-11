@@ -12,3 +12,19 @@
   --font-size-lg: 1.125rem;
   --font-size-xl: 1.25rem;
 }
+
+/* Add custom responsive utilities for extra small screens */
+@media (min-width: 400px) {
+  .xs\:gap-0\.5 {
+    gap: 0.125rem;
+  }
+  .xs\:p-0\.5 {
+    padding: 0.125rem;
+  }
+  .xs\:h-8 {
+    height: 2rem;
+  }
+  .xs\:text-xs {
+    font-size: 0.75rem;
+  }
+}

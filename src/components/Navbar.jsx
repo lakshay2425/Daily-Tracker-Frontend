@@ -134,7 +134,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar */}
-      <nav className="sticky top-0 z-40 bg-gradient-to-r from-slate-900 via-purple-900 to-indigo-900 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-slate-900 via-purple-900 to-indigo-900 backdrop-blur-xl border-b border-white/10 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}

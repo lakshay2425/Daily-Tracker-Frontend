@@ -138,45 +138,46 @@ const CalendarView = ({ data, navigateToDay }) => {
   const days = getDaysInMonth(currentDate);
 
   return (
-    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-2xl">
-      <div className="flex items-center gap-3 mb-6">
-        <Calendar className="text-blue-400" size={24} />
-        <h2 className="text-2xl font-bold text-white">Calendar</h2>
+    <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-3 sm:p-6 border border-white/10 shadow-2xl">
+      <div className="flex items-center gap-3 mb-4 sm:mb-6">
+        <Calendar className="text-blue-400" size={20} sm:size={24} />
+        <h2 className="text-xl sm:text-2xl font-bold text-white">Calendar</h2>
       </div>
       
       <div className="calendar-container">
         {/* Navigation */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-6">
           <button 
             onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
-            className="px-4 py-2 bg-purple-500/20 border border-purple-400/30 text-white rounded-lg hover:bg-purple-500/30 transition-all duration-300 hover:-translate-y-0.5"
+            className="px-2 sm:px-4 py-1 sm:py-2 bg-purple-500/20 border border-purple-400/30 text-white rounded-lg hover:bg-purple-500/30 transition-all duration-300 hover:-translate-y-0.5"
           >
             ←
           </button>
           
-          <h3 className="text-xl font-bold text-white">
+          <h3 className="text-base sm:text-xl font-bold text-white">
             {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
           </h3>
           
           <button 
             onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
-            className="px-4 py-2 bg-purple-500/20 border border-purple-400/30 text-white rounded-lg hover:bg-purple-500/30 transition-all duration-300 hover:-translate-y-0.5"
+            className="px-2 sm:px-4 py-1 sm:py-2 bg-purple-500/20 border border-purple-400/30 text-white rounded-lg hover:bg-purple-500/30 transition-all duration-300 hover:-translate-y-0.5"
           >
             →
           </button>
         </div>
         
         {/* Weekday headers */}
-        <div className="grid grid-cols-7 gap-1 mb-2">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className="text-center text-gray-400 text-sm font-semibold py-2">
+        <div className="grid grid-cols-7 gap-1 mb-1 sm:mb-2">
+          {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+            <div key={index} className="text-center text-gray-400 text-[10px] xs:text-xs sm:text-sm font-semibold py-1 sm:py-2">
               {day}
             </div>
           ))}
         </div>
         
         {/* Calendar grid */}
-        <div className="grid grid-cols-7 gap-0.5 sm:gap-1">
+        // Calendar grid - make it more compact on small screens
+        <div className="grid grid-cols-7 gap-0 xs:gap-0.5 sm:gap-1">
           {days.map((dayObj, index) => {
             const { date, isCurrentMonth } = dayObj;
             const isToday = date.toDateString() === new Date().toDateString();
@@ -188,7 +189,7 @@ const CalendarView = ({ data, navigateToDay }) => {
                 key={index}
                 onClick={() => navigateToDay(date)}
                 className={`
-          relative h-8 sm:h-10 md:h-12 p-0.5 sm:p-1 text-xs sm:text-sm font-medium transition-all duration-300 rounded-lg
+          relative h-7 xs:h-8 sm:h-10 md:h-12 p-0 xs:p-0.5 sm:p-1 text-xs sm:text-sm font-medium transition-all duration-300 rounded-lg
           ${isCurrentMonth ? 'text-white hover:bg-purple-500/20' : 'text-gray-600'}
           ${isToday ? 'bg-blue-500/20 border border-blue-400 text-blue-300' : ''}
           ${hasData ? 'bg-purple-500/10 border border-purple-400/30' : ''}
@@ -196,7 +197,7 @@ const CalendarView = ({ data, navigateToDay }) => {
         `}
               >
                 <div className="flex flex-col items-center justify-center h-full">
-                  <span className="text-xs sm:text-sm">{date.getDate()}</span>
+                  <span className="text-[10px] xs:text-xs sm:text-sm">{date.getDate()}</span>
                   {hasData && (
                      <div className="hidden sm:block mt-0.5 w-full max-w-[24px] bg-gray-700 rounded-full h-1">
               <div
