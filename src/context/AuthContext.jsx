@@ -14,7 +14,6 @@ export const AuthProvider = ({ children }) => {
         withCredentials: true
       }
       )
-      console.log(apiResponse, "API response of verify token")
       if (apiResponse.status === 200 &&  apiResponse.data.userEmail) {
         setIsAuthenticated(true);
         setGmail(apiResponse.data.userEmail);
