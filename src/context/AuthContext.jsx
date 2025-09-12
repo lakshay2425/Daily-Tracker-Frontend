@@ -1,4 +1,4 @@
-import  { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 import axios from 'axios';
@@ -8,35 +8,31 @@ export const AuthProvider = ({ children }) => {
   const [gmail, setGmail] = useState("");
   const [isLoading, setIsLoading] = useState(true)
 
-const checkAuthStatus = async () => {
-try {
-    const apiResponse = await axios.get(`${import.meta.env.VITE_AUTH_URL}/auth/google/verify`, {
-      withCredentials: true
-    }
-    )
-//     console.log("Auth Status Check:", {
-//     isAuthenticated,
-//     gmail,
-//     apiResponse: apiResponse?.status
-// });
-    // console.log(apiResponse, "API response of verify token")
-    if(apiResponse.status === 200){
-      setIsAuthenticated(true);
-      setGmail(apiResponse.data.userInfo.userInfo.userEmail);
-    }else{
+  const checkAuthStatus = async () => {
+    try {
+      const apiResponse = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/dailyTracker/verifyAuthStatus`, {
+        withCredentials: true
+      }
+      )
+      console.log(apiResponse, "API response of verify token")
+      if (apiResponse.status === 200 &&  apiResponse.data.userEmail) {
+        setIsAuthenticated(true);
+        setGmail(apiResponse.data.userEmail);
+      } else {
+        setIsAuthenticated(false);
+        setGmail("");
+      }
+    } catch (error) {
+      console.log("Faled to verify", error.message);
       setIsAuthenticated(false);
       setGmail("");
+    } finally {
+      setIsLoading(false);
     }
-} catch (error) {
-  console.log("Faled to verify", error.message);
-  setIsAuthenticated(false);
-      setGmail("");
-}finally{
-  setIsLoading(false);
-}
-}
-  useEffect( ()=>{
-      checkAuthStatus();
+  }
+
+  useEffect(() => {
+    checkAuthStatus();
   }, [])
 
   const authContextValue = {
