@@ -1,5 +1,5 @@
 import { useLoading } from "../hooks/useLoading";
-import LoadingSpinner from "./Spinner";
+import {LoadingSpinner} from "./Spinner";
 
 
 
