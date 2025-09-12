@@ -7,47 +7,52 @@ import {  Routes, Route } from "react-router-dom"
 import RenderProtectedRoutes from "./utilis/renderProtectedRoute.jsx"
 import { useContext } from "react"
 import { AuthContext } from "./context/AuthContext.jsx"
+import LoadingScreen from "./components/LoadingScreen.jsx"
+import ScrollToTop  from './utilis/scrollToTop.jsx'
 
 function App() {
   const {isAuthenticated, isLoading} = useContext(AuthContext);
   return (
     <>
+    <LoadingScreen>
+          <ScrollToTop/>
     <Navbar/>
      <Routes>
       <Route path="/" element={
         <RenderProtectedRoutes
-      condition={
-        isAuthenticated === false
-      }
-      renderPage={<LoginPage/>}
-      errorMessage="You are already loggedIn"
+        condition={
+          isAuthenticated === false
+        }
+        renderPage={<LoginPage/>}
+        errorMessage="You are already loggedIn"
         devMode={import.meta.env.VITE_DEV_MODE == "true"}
         fallback="/home"
         isLoading={isLoading}
-      />}/>
+        />}/>
 
      <Route path="/home" element={
        <RenderProtectedRoutes
-      condition={isAuthenticated === true}
+       condition={isAuthenticated === true}
       renderPage={<Home/>}
       errorMessage="You cannot access it Login first."
         devMode={import.meta.env.VITE_DEV_MODE == "true"}
         fallback="/"
         isLoading={isLoading}
-      />
+        />
       }/>
 
      <Route path="/form" element={
-      <RenderProtectedRoutes
-      condition={isAuthenticated === true}
-      renderPage={<DailyEntryForm/>}
-      isLoading={isLoading}
-      errorMessage="You cannot access it.Login first."
-        devMode={import.meta.env.VITE_DEV_MODE == "true"}
-        fallback="/"
-      />
-     }/>
+       <RenderProtectedRoutes
+       condition={isAuthenticated === true}
+       renderPage={<DailyEntryForm/>}
+       isLoading={isLoading}
+       errorMessage="You cannot access it.Login first."
+       devMode={import.meta.env.VITE_DEV_MODE == "true"}
+       fallback="/"
+       />
+      }/>
      </Routes>
+      </LoadingScreen>
     </>
   )
 }
