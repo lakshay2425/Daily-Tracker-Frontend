@@ -8,14 +8,14 @@ const RenderProtectedRoute = ({
   errorMessage,
   devMode = false,
 }) => {
+    if(devMode) return renderPage
 
-  const checkFailed = () => {
+    if(condition) return renderPage
+  
     if (!condition) {
       toast.error(errorMessage);
       return <Navigate to={fallback} replace/>;
     }
-  };
-  return <div>{devMode ? renderPage : condition ? renderPage : checkFailed()}</div>;
 };
 
 export default RenderProtectedRoute;
