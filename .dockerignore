@@ -1,0 +1,5 @@
+.gitignore
+.git
+.vscode
+eslint.config.js
+node_modules
