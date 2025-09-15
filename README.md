@@ -90,14 +90,12 @@ Create a `.env` file in the root directory:
 ```env
 # Authentication Service URLs
 VITE_AUTH_URL=http://localhost:5000/api
-# VITE_AUTH_URL=https://authentication.yourdomain.com/api
 
 # Backend API URLs
 VITE_BACKEND_URL=http://localhost:8000/api
-# VITE_BACKEND_URL=https://api.tracker.yourdomain.com/api
 
 # Google OAuth Configuration
-VITE_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+VITE_GOOGLE_CLIENT_ID=
 
 # Development Mode (bypasses authentication in development)
 VITE_DEV_MODE=false
